@@ -42,12 +42,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let acao of investimento.acoes" >
-      <td> {{ acao.nome }} </td>
-      <td> {{ acao.valor | currency : 'BRL' }} </td>
-      <td> <input [(ngModel)]="acao.resgate" (onblur)="calcularResgate(acao.resgate)"
-                  class="form-control" type="number" /> </td>
-    </tr>
+      <tr *ngFor="let acao of investimento.acoes" >
+        <td> {{ acao.nome }} </td>
+        <td> {{ acao.valor | currency : 'BRL' }} </td>
+        <td> <input [(ngModel)]="acao.resgate" (blur)="calcularResgate()"
+                    class="form-control" type="number" /></td>
+      </tr>
     </tbody>
   </table>
+  <button type="button" class="btn btn-primary" (click)="confirmarResgate(investimento)" >Confirmar Resgate</button>
 </div>

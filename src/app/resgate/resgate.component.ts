@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponentErro, ModalComponentSucesso } from '../modal/modal.component';
 
 
 @Component({
@@ -11,7 +13,10 @@ export class ResgateComponent implements OnInit {
 
   investimento: any;
 
-  constructor(private route: Router) {
+  constructor(
+    private route: Router,
+    private modal: NgbModal
+    ) {
     this.investimento = this.route.getCurrentNavigation()?.extras.state;
 
     if(this.investimento === undefined){
@@ -50,25 +55,39 @@ export class ResgateComponent implements OnInit {
         ]
       }
     }
-
-    console.log(this.investimento);
    }
 
   ngOnInit() {
     this.investimento.saldoTotalResgatar = 0;
     this.investimento.acoes.forEach((element: any) => {
 
-      element.valor = (this.investimento.saldoTotalDisponivel * element.percentual /100);;
-      // console.log("Valor " + element.valor);
-      // console.log("Saldo " + this.investimento.saldoTotalResgatar);
+      element.valor = (this.investimento.saldoTotalDisponivel * element.percentual /100);
     });
   }
 
-  calcularResgate(valor:any){
-    console.log(valor);
-    this.investimento.saldoTotalResgatar += valor;
-    console.log("Saldo " + this.investimento.saldoTotalResgatar);
+  calcularResgate(){
+
+    let total = 0;
+    let valor = 0;
+
+    this.investimento.acoes.forEach((element: any) => {
+      if(element.resgate != undefined || element.resgate != null){
+        valor = element.resgate;
+        if(valor <= element.valor){
+          total += valor;
+        }
+      }
+
+      this.investimento.saldoTotalResgatar = total;
+
+    });
   }
 
-
+  confirmarResgate(investimento : any){
+    if(investimento.saldoTotalResgatar > 0){
+      this.modal.open(ModalComponentSucesso).componentInstance.name = 'Sucesso';
+    }else{
+      this.modal.open(ModalComponentErro).componentInstance.name = 'Erro';
+    }
+  }
 }

@@ -14,12 +14,16 @@ import { Service } from './service/service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvestimentosComponent } from './investimentos/investimentos.component';
 import { FormsModule} from '@angular/forms';
+import { ModalComponentSucesso } from './modal/modal.component';
+import { ModalComponentErro } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResgateComponent,
     InvestimentosComponent,
+    ModalComponentSucesso,
+    ModalComponentErro,
   ],
   imports: [
     AppRoutingModule,

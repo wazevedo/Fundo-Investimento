@@ -5,3 +5,7 @@
   width: 200px;
   border: 2px solid;
 } */
+button{
+  display: block;
+  float: right;
+}
