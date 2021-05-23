@@ -1,0 +1,53 @@
+
+<div >
+  <div class="content">
+    <h4>Dados do Investimento</h4>
+    <div>
+        <div class="op1">
+          <span>
+            Nome
+          </span>
+          <span>
+            {{investimento.nome}}
+          </span>
+        </div>
+        <div class="op1">
+          <span>
+          Saldo total Disponivel
+        </span>
+        <span>
+          {{investimento.saldoTotalDisponivel | currency : 'BRL' }}
+        </span>
+        </div>
+        <div class="op1">
+          <span>
+          Valor total a resgatar
+        </span>
+        <span>
+          {{investimento.saldoTotalResgatar | currency : 'BRL' }}
+        </span>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="content" role="main">
+  <h4>Resgate do seu jeito</h4>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Acao</th>
+      <th scope="col">Saldo Acumulado</th>
+      <th scope="col">Valor a Resgatar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let acao of investimento.acoes" >
+      <td> {{ acao.nome }} </td>
+      <td> {{ acao.valor | currency : 'BRL' }} </td>
+      <td> <input [(ngModel)]="acao.resgate" (onblur)="calcularResgate(acao.resgate)"
+                  class="form-control" type="number" /> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
