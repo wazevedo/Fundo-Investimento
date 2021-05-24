@@ -13,49 +13,9 @@ export class ResgateComponent implements OnInit {
 
   investimento: any;
 
-  constructor(
-    private route: Router,
-    private modal: NgbModal
-    ) {
+  constructor( private route: Router, private modal: NgbModal ) {
     this.investimento = this.route.getCurrentNavigation()?.extras.state;
-
-    if(this.investimento === undefined){
-
-      this.investimento = {
-        "nome": "INVESTIMENTO I",
-        "objetivo": "Minha aposentadoria",
-        "saldoTotalDisponivel": 39321.29,
-        "indicadorCarencia": "N",
-        "acoes": [
-          {
-            "id": "1",
-            "nome": "BBAS3",
-            "percentual": 28.1
-          },
-          {
-            "id": "2",
-            "nome": "VALE3",
-            "percentual": 20.71
-          },
-          {
-            "id": "3",
-            "nome": "PETR4",
-            "percentual": 21.63
-          },
-          {
-            "id": "4",
-            "nome": "CMIG3",
-            "percentual": 12.41
-          },
-          {
-            "id": "5",
-            "nome": "OIBR3",
-            "percentual": 17.15
-          }
-        ]
-      }
-    }
-   }
+  }
 
   ngOnInit() {
     this.investimento.saldoTotalResgatar = 0;
@@ -84,10 +44,30 @@ export class ResgateComponent implements OnInit {
   }
 
   confirmarResgate(investimento : any){
-    if(investimento.saldoTotalResgatar > 0){
-      this.modal.open(ModalComponentSucesso).componentInstance.name = 'Sucesso';
+    let erro:any;
+    let acao:any;
+
+    this.investimento.acoes.forEach((element: any) => {
+      if(element.resgate > element.valor ){
+        if(acao){
+          acao += ", " + element.nome
+        }else{
+          acao = element.nome
+          erro = "Foi digitado valor invalido na ação " +
+            element.nome + " valor maximo disponivel e R$" + element.valor;
+        }
+      }
+    });
+    if(investimento.saldoTotalResgatar > 0 && !erro && !acao){
+      this.modal.open(ModalComponentSucesso);
     }else{
-      this.modal.open(ModalComponentErro).componentInstance.name = 'Erro';
+      if(acao && acao.indexOf(",") != -1){
+        erro = "Foram digitado valores invalido nas ações " + acao;
+      }else if(!erro){
+        erro = "preencher pelo menos um dos campos a resgatar.";
+      }
+      this.modal.open(ModalComponentErro).componentInstance.erro = erro;
     }
+
   }
 }

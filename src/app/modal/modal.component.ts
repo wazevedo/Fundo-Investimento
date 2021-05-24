@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,7 +8,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponentSucesso {
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, private router: Router) { }
+
+  novoResgate(){
+    this.activeModal.close('Close click')
+    this.router.navigate([''])
+  }
 }
 
 @Component({
@@ -16,5 +22,6 @@ export class ModalComponentSucesso {
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponentErro {
+  @Input() erro:any ;
   constructor(public activeModal: NgbActiveModal) { }
 }
