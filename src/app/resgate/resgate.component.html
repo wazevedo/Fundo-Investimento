@@ -46,8 +46,14 @@
           <td> {{ acao.nome }} </td>
           <td> {{ acao.valor | currency : 'BRL' }} </td>
           <td> <input [(ngModel)]="acao.resgate" (blur)="calcularResgate()" class="form-control"
-                      type="text" currencyMask
-                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"   /></td>
+                      type="text" currencyMask [maxlength]="15"
+                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                      [ngClass]="(acao.resgate > acao.valor )?'border border-danger':'border border-primary'" />
+
+          <div [hidden]="acao.resgate == null || acao.resgate < acao.valor" class="erro" >
+            Valor acima do Disponivel.
+          </div>
+          </td>
         </tr>
       </tbody>
     </table>
