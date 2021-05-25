@@ -1,54 +1,56 @@
 
-<div >
-  <div class="content">
-    <h4>Dados do Investimento</h4>
-    <div>
-        <div class="op1">
-          <span>
-            Nome
-          </span>
-          <span>
-            {{investimento.nome}}
-          </span>
-        </div>
-        <div class="op1">
-          <span>
-          Saldo total Disponivel
-        </span>
-        <span>
-          {{investimento.saldoTotalDisponivel | currency : 'BRL' }}
-        </span>
-        </div>
-        <div class="op1">
-          <span>
-          Valor total a resgatar
-        </span>
-        <span>
-          {{investimento.saldoTotalResgatar | currency : 'BRL' }}
-        </span>
-        </div>
+<div class="content" >
+  <h4 class="title">Dados do Investimento</h4>
+  <div class="row col-md-6">
+    <div class="col-sm">
+      <span>
+        Nome
+      </span>
+      <br>
+      <span>
+        {{investimento.nome}}
+      </span>
+    </div>
+    <div class="col-sm">
+      <span>
+        Saldo total Disponivel
+      </span>
+      <br>
+      <span>
+        {{investimento.saldoTotalDisponivel | currency : 'BRL' }}
+      </span>
+    </div>
+    <div class="col-sm">
+      <span>
+        Valor total a resgatar
+      </span>
+      <br>
+      <span>
+        {{investimento.saldoTotalResgatar | currency : 'BRL' }}
+      </span>
     </div>
   </div>
-</div>
-
-<div class="content" role="main">
-  <h4>Resgate do seu jeito</h4>
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Acao</th>
-      <th scope="col">Saldo Acumulado</th>
-      <th scope="col">Valor a Resgatar</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let acao of investimento.acoes" >
-        <td> {{ acao.nome }} </td>
-        <td> {{ acao.valor | currency : 'BRL' }} </td>
-        <td> <input [(ngModel)]="acao.resgate" (blur)="calcularResgate()"
-                    class="form-control" type="number" /></td>
+  <br>
+  <div class="col-md-6">
+    <h4>Resgate do seu jeito</h4>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Acao</th>
+        <th scope="col">Saldo Acumulado</th>
+        <th scope="col">Valor a Resgatar</th>
       </tr>
-    </tbody>
-  </table>
-  <button type="button" class="btn btn-primary" (click)="confirmarResgate(investimento)" >Confirmar Resgate</button>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acao of investimento.acoes" >
+          <td> {{ acao.nome }} </td>
+          <td> {{ acao.valor | currency : 'BRL' }} </td>
+          <td> <input [(ngModel)]="acao.resgate" (blur)="calcularResgate()" class="form-control"
+                      type="text" currencyMask
+                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"   /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="confirmarResgate(investimento)" >Confirmar Resgate</button>
+  </div>
 </div>

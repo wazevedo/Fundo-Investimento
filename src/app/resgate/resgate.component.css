@@ -1,11 +1,15 @@
-/* div.op1 {
+div.col-sm {
   display: inline-block;
   text-align: center;
-  height: 150px;
-  width: 200px;
-  border: 2px solid;
-} */
+  border: 1px solid;
+}
 button{
   display: block;
   float: right;
+}
+.row{
+  margin-left: 1px;
+}
+.title{
+  margin-left: 16px;
 }

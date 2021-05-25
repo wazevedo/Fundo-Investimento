@@ -1,22 +1,26 @@
 <!-- <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0"> -->
   <!-- <ngb-panel title="Simple"> -->
     <!-- <ng-template ngbPanelContent> -->
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Objetivo</th>
-          <th scope="col">Saldo Total Disponivel </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let investimento of lista" (click)="investimento.indicadorCarencia == 'S' || resgatarInvestimento(investimento)" >
-          <td> {{ investimento.nome }} </td>
-          <td> {{ investimento.objetivo }} </td>
-          <td> {{ investimento.saldoTotalDisponivel | currency : 'BRL' }} </td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="content">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Objetivo</th>
+              <th scope="col">Saldo Total Disponivel </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let investimento of lista" (click)="investimento.indicadorCarencia == 'S' || resgatarInvestimento(investimento)" >
+              <td> {{ investimento.nome }} </td>
+              <td> {{ investimento.objetivo }} </td>
+              <td> {{ investimento.saldoTotalDisponivel | currency : 'BRL' }} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     <!-- </ng-template> -->
   <!-- </ngb-panel> -->
 <!-- </ngb-accordion> -->

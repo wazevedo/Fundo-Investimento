@@ -16,6 +16,7 @@ import { InvestimentosComponent } from './investimentos/investimentos.component'
 import { FormsModule} from '@angular/forms';
 import { ModalComponentSucesso } from './modal/modal.component';
 import { ModalComponentErro } from './modal/modal.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ModalComponentErro } from './modal/modal.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    CurrencyMaskModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
