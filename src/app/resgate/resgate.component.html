@@ -51,7 +51,7 @@
                       [ngClass]="(acao.resgate > acao.valor )?'border border-danger':'border border-primary'" />
 
           <div [hidden]="acao.resgate == null || acao.resgate < acao.valor" class="erro" >
-            Valor acima do Disponivel.
+            Valor maximo permitido e {{ acao.valor | currency : 'BRL' }} .
           </div>
           </td>
         </tr>
